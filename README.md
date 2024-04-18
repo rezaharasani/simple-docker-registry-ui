@@ -52,20 +52,20 @@ services:
     container_name: registry-server
 ```
 
+**Note:** For local usage, we used **localhost** keyword, and for remote usage, we used **{DOCKER_REGISTRY_IP_ADDRESS}** keyword.
+
 ##  Configure custom registry
   - Edit Docker config `/etc/docker/daemon.json`
   - Modify file `docker.json`
     ```
     {
-      "insecure-registries" : ["localhost:5000"]
+      "insecure-registries" : ["{localhost:5000 | DOCKER_REGISTRY_IP_ADDRESS}"]
     }
     ```
   - Restat Docker `sudo service restart docker`
 
 
 ## Working with Local Docker Registry
-For local usage, we should used **localhost** keyword, and for remote usage, we should used **{DOCKER_REGISTRY_IP_ADDRESS}** keyword.
-
 ### Pull and push custome docker images
   -  Pull example image: `docker pull busybox
   -  Create new version of busybox with *NEW_VERSION* tag which represents URL of custom Docker Registry: `docker tag busybox localhost:5000/busybox:{NEW_VERSION} | {DOCKER_REGISTRY_IP_ADDRESS}/busybox:{NEW_VERSION}`
