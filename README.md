@@ -52,7 +52,7 @@ services:
     container_name: registry-server
 ```
 
-**Note:** For local usage, we used **localhost** keyword, and for remote usage, we used **{DOCKER_REGISTRY_IP_ADDRESS}** keyword. Also, the **|** sign means you should used one of *localhost* or *DOCKER_REGISTRY_IP_ADDRESS*, not both of them.
+**Note:** For local usage, we used `localhost` keyword, and for remote usage, we used `{DOCKER_REGISTRY_IP_ADDRESS}` keyword. Also, the **|** sign means you should used one of *localhost* or *DOCKER_REGISTRY_IP_ADDRESS*, not both of them.
 
 ##  Configure custom registry
   - Edit Docker config `/etc/docker/daemon.json`
