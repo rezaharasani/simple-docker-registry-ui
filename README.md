@@ -55,14 +55,13 @@ services:
 **Note:** For local usage, we used `localhost` keyword, and for remote usage, we used `{DOCKER_REGISTRY_IP_ADDRESS}` keyword. Also, the **|** sign means you should used one of *localhost* or *DOCKER_REGISTRY_IP_ADDRESS*, not both of them.
 
 ##  Configure custom registry
-  - Edit Docker config `/etc/docker/daemon.json`
-  - Modify file `docker.json`
-    ```
-    {
-      "insecure-registries" : ["{localhost:5000 | DOCKER_REGISTRY_IP_ADDRESS}"]
-    }
-    ```
-  - Restat Docker `sudo service restart docker`
+To add an insecure docker registry, add the file `/etc/docker/daemon.json` with the following content:
+```
+{
+  "insecure-registries" : ["{localhost:5000 | DOCKER_REGISTRY_IP_ADDRESS}"]
+}
+```
+and then restart docker: `sudo service restart docker`
 
 
 ## Working with Local Docker Registry
