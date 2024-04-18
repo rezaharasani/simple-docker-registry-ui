@@ -72,15 +72,15 @@ For local usage, we should used **localhost** keyword, and for remote usage, we 
   -  Remove old image: `docker rmi busybox`
   -  Publish new image to custom Docker Registry `docker push localhost:5000/busybox:{NEW_VERSION} | {DOCKER_REGISTRY_IP_ADDRESS}/busybox:{NEW_VERSION}`
 
-## Remove and push new images
+### Remove and push new images
   - Remove pushed image: `docker rmi localhost:5000/busybox:{NEW_VERSION} | {DOCKER_REGISTRY_IP_ADDRESS}/busybox:{NEW_VERSION}`
   - Pull pushed image: `docker pull localhost:5000/busybox:{NEW_VERSION} | {DOCKER_REGISTRY_IP_ADDRESS}/busybox:{NEW_VERSION}`
 
-## Manage Docker Registry
+### Manage Docker Registry
   - List images via REST API: `http://{localhost:5000 | DOCKER_REGISTRY_IP_ADDRESS}/v2/_catalog`
   - User Web UI: `http://{localhost:8080 | DOCKER_REGISTRY_IP_ADDRESS}/`
 
-## Delete image
+### Delete image
   - Delete via UI: `http://{localhost:8080 | DOCKER_REGISTRY_IP_ADDRESS}/`
   - Run GC command: `docker exec registry-srv bin/registry garbage-collect /etc/docker/registry/config.yml`
 
