@@ -63,7 +63,7 @@ services:
   - Restat Docker `sudo service restart docker`
 
 
-# Working with Local Docker Registry
+## Working with Local Docker Registry
 For local usage, we should used **localhost** keyword, and for remote usage, we should used **{DOCKER_REGISTRY_IP_ADDRESS}** keyword.
 
 ### Pull and push custome docker images
