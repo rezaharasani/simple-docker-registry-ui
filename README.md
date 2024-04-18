@@ -5,6 +5,9 @@ Setup Simple Docker Registry UI for Simple Jobs
   <img src="https://camo.githubusercontent.com/785c9401ae7cc0996bdc1eb3e84ec707e895c8b8d12822d5fe120293bdba69ab/68747470733a2f2f7261772e6769746875622e636f6d2f4a6f7869742f646f636b65722d72656769737472792d75692f6d61696e2f646f636b65722d72656769737472792d75692e676966" width="800"/>
 </p>
 
+Configure own Docker Registry with 3rd party UI manager: https://github.com/Joxit/docker-registry-ui
+
+
 ## Overview
 This project aims to provide a simple and complete user interface for your private docker registry. You can customize the interface with various options.
 
@@ -47,6 +50,37 @@ services:
     volumes:
       - ./registry/data:/var/lib/registry
     container_name: registry-server
-
 ```
+
+##  Configure custom registry
+  - Edit Docker config `/etc/docker/daemon.json`
+  - Modify file `docker.json`
+    ```
+    {
+      "insecure-registries" : ["localhost:5000"]
+    }
+    ```
+  - Restat Docker `sudo service restart docker`
+
+
+# Working with Local Docker Registry
+For local usage, we should used **localhost** keyword, and for remote usage, we should used **{DOCKER_REGISTRY_IP_ADDRESS}** keyword.
+
+### Pull and push custome docker images
+  -  Pull example image: `docker pull busybox
+  -  Create new version of busybox with *NEW_VERSION* tag which represents URL of custom Docker Registry: `docker tag busybox localhost:5000/busybox:{NEW_VERSION} | {DOCKER_REGISTRY_IP_ADDRESS}/busybox:{NEW_VERSION}`
+  -  Remove old image: `docker rmi busybox`
+  -  Publish new image to custom Docker Registry `docker push localhost:5000/busybox:{NEW_VERSION} | {DOCKER_REGISTRY_IP_ADDRESS}/busybox:{NEW_VERSION}`
+
+## Remove and push new images
+  - Remove pushed image: `docker rmi localhost:5000/busybox:{NEW_VERSION} | {DOCKER_REGISTRY_IP_ADDRESS}/busybox:{NEW_VERSION}`
+  - Pull pushed image: `docker pull localhost:5000/busybox:{NEW_VERSION} | {DOCKER_REGISTRY_IP_ADDRESS}/busybox:{NEW_VERSION}`
+
+## Manage Docker Registry
+  - List images via REST API: `http://{localhost:5000 | DOCKER_REGISTRY_IP_ADDRESS}/v2/_catalog`
+  - User Web UI: `http://{localhost:8080 | DOCKER_REGISTRY_IP_ADDRESS}/`
+
+## Delete image
+  - Delete via UI: `http://{localhost:8080 | DOCKER_REGISTRY_IP_ADDRESS}/`
+  - Run GC command: `docker exec registry-srv bin/registry garbage-collect /etc/docker/registry/config.yml`
 
